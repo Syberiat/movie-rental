@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.mysema.query.types.Predicate;
 import com.mysema.query.types.expr.BooleanExpression;
 
+import pl.movie.rental.DTO.MovieDTO;
 import pl.movie.rental.commands.MovieSearchCriteriaCommand;
+import pl.movie.rental.model.Movie;
 import pl.movie.rental.model.QMovie;
 import pl.movie.rental.model.criteria.service.MovieQueryFilterService;
 
@@ -19,6 +22,9 @@ public class MovieQueryFilterServiceImpl implements MovieQueryFilterService {
 
 	private List<BooleanExpression> expressions;
 
+	@Autowired
+	private MovieDTO movie;
+
 	@Override
 	public Predicate toPredicate(MovieSearchCriteriaCommand mscc) {
 		expressions = new ArrayList<>();
@@ -26,7 +32,7 @@ public class MovieQueryFilterServiceImpl implements MovieQueryFilterService {
 		expressions.add(QMovie.movie.rentPeriodList.size().goe(0));
 
 		if (!StringUtils.isEmpty(mscc.getCode())) {
-			expressions.add(QMovie.movie.code.containsIgnoreCase(mscc.getCode()));
+			expressions.add(QMovie.movie.code.contains(mscc.getCode()));
 		}
 		if (!StringUtils.isEmpty(mscc.getTitle())) {
 			expressions.add(QMovie.movie.title.containsIgnoreCase(mscc.getTitle()));

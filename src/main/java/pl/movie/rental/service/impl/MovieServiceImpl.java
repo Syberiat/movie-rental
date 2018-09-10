@@ -27,6 +27,7 @@ public class MovieServiceImpl implements MovieService {
 	private MovieRepository movieRepository;
 
 
+	@Qualifier("movieQueryFilterServiceImpl")
 	@Autowired
 	private MovieQueryFilterService movieQueryFiltrService;
 

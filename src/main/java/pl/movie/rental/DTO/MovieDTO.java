@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,5 +21,5 @@ public class MovieDTO {
 	private String genre;
 	private int price;
 	private Boolean is_available;
-	private List<RentPeriodDTO> rentPeriodList;
+	public List<RentPeriodDTO> rentPeriodList;
 }

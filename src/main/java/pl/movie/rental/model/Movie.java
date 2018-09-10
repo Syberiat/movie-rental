@@ -1,5 +1,6 @@
 package pl.movie.rental.model;
 
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,6 +34,6 @@ public class Movie {
 	private Boolean is_available;
 
 	@OneToMany(mappedBy = "movie", fetch = FetchType.LAZY)
-	private List<RentPeriod> rentPeriodList;
+	public List<RentPeriod> rentPeriodList;
 
 }
